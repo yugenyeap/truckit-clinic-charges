@@ -31,8 +31,8 @@ Install and run:
 ## Clone the Repository
 
 ```bash
-https://github.com/yugenyeap/truckit-clinic-charges.git
-cd truckit
+git clone https://github.com/yugenyeap/truckit-clinic-charges.git
+cd truckit-clinic-charges
 ```
 
 ## Start the Full Stack Application
@@ -42,6 +42,8 @@ From the project root directory:
 ```bash
 docker compose up --build
 ```
+
+In a browser, navigate to http://localhost:4200
 
 ---
 
