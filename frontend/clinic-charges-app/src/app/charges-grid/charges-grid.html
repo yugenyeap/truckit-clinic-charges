@@ -1,0 +1,17 @@
+<div class="ag-theme-quartz grid-container">
+  <ag-grid-angular
+    theme="legacy"
+    style="width: 100%; height: 100%;"
+
+    [columnDefs]="columnDefs"
+
+    rowModelType="infinite"
+    [cacheBlockSize]="20"
+
+    (sortChanged)="onSortChanged()"
+    (filterChanged)="setupDatasource()"
+    
+    (cellValueChanged)="onCellValueChanged($event)">
+
+  </ag-grid-angular>
+</div>

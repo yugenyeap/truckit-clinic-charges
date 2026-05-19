@@ -1,0 +1,35 @@
+<form (ngSubmit)="submit()">
+
+  <input
+    type="text"
+    placeholder="Medical Centre Name"
+    [(ngModel)]="medicalCentreName"
+    name="medicalCentreName"
+  />
+
+  <input
+    type="text"
+    placeholder="Patient Visit Type"
+    [(ngModel)]="patientVisitType"
+    name="patientVisitType"
+  />
+
+  <input
+    type="text"
+    placeholder="Charge Type"
+    [(ngModel)]="chargeType"
+    name="chargeType"
+  />
+
+  <input
+    type="number"
+    placeholder="Amount"
+    [(ngModel)]="amount"
+    name="amount"
+  />
+
+  <button type="submit">
+    Add Charge
+  </button>
+
+</form>

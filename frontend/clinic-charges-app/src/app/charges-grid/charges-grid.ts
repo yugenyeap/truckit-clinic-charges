@@ -1,0 +1,232 @@
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  inject
+} from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+
+import { AgGridAngular } from 'ag-grid-angular';
+
+import {
+  ColDef,
+  IDatasource,
+  IGetRowsParams
+} from 'ag-grid-community';
+
+import { ChargesService } from '../services/charges';
+
+@Component({
+  selector: 'app-charges-grid',
+  standalone: true,
+  imports: [CommonModule, AgGridAngular],
+  templateUrl: './charges-grid.html',
+  styleUrls: ['./charges-grid.css']
+})
+export class ChargesGridComponent implements AfterViewInit {
+
+  private chargesService = inject(ChargesService);
+
+  @ViewChild(AgGridAngular)
+  agGrid!: AgGridAngular;
+
+  columnDefs: ColDef[] = [
+    {
+      field: 'id',
+      sortable: true,
+    },
+    {
+      field: 'medical_centre_name',
+      sortable: true,
+      filter: 'agTextColumnFilter',
+      editable: true,
+    },
+    {
+      field: 'patient_visit_type',
+      sortable: true,
+      editable: true,
+    },
+    {
+      field: 'charge_type',
+      sortable: true,
+      filter: 'agTextColumnFilter',
+      editable: true,
+    },
+    {
+      field: 'amount',
+      sortable: true,
+      editable: true,
+    },
+  ];
+
+  ngAfterViewInit(): void {
+
+    this.setupDatasource();
+
+  }
+
+  onSortChanged(): void {
+
+    this.agGrid.api.purgeInfiniteCache();
+
+  }
+
+  onCellValueChanged(event: any): void {
+
+    const row = event.data;
+
+    const updatePayload = {
+      medical_centre_name: row.medical_centre_name,
+      patient_visit_type: row.patient_visit_type,
+      charge_type: row.charge_type,
+      amount: row.amount
+    };
+
+    console.log('Updating:', updatePayload);
+
+    this.chargesService
+      .updateCharge(row.id, updatePayload)
+      .subscribe({
+
+        next: () => {
+
+          console.log('Update successful');
+
+          this.setupDatasource();
+
+
+        },
+
+        error: (error) => {
+
+          console.error(error);
+
+        }
+
+      });
+
+  }
+
+  setupDatasource(): void {
+
+    const datasource: IDatasource = {
+
+      getRows: (params: IGetRowsParams) => {
+
+        const start = params.startRow;
+        const limit = params.endRow - params.startRow;
+
+        const sortModel = params.sortModel?.[0];
+
+        const sortField = sortModel?.colId;
+        const sortDirection = sortModel?.sort;
+
+        const filterModel = params.filterModel;
+        console.log('filterModel', filterModel);
+
+        const medicalCentreFilter =
+          filterModel['medical_centre_name']?.filter;
+
+        const chargeTypeFilter =
+          filterModel['charge_type']?.filter;
+
+        this.chargesService
+          .getCharges(
+            start,
+            limit,
+            sortField,
+            sortDirection,
+            medicalCentreFilter,
+            chargeTypeFilter
+          )
+          .subscribe({
+
+            next: (response) => {
+
+              console.log('params', params)
+              console.log('response', response)
+
+              params.successCallback(
+                response.rows,
+                response.total
+              );
+
+            },
+
+            error: () => {
+
+              params.failCallback();
+
+            }
+
+          });
+
+      }
+
+    };
+
+    this.agGrid.api.setGridOption(
+      'datasource',
+      datasource
+    );
+
+  }
+
+}
+
+// onGridReady(params: GridReadyEvent): void {
+//   const datasource: IDatasource = {
+//     getRows: (params: IGetRowsParams) => {
+//       // console.log('Requesting rows', params.startRow, params.endRow);
+//       // console.log('Params', params);
+
+//       const start = params.startRow;
+//       const limit = params.endRow - params.startRow;
+
+//       const sortModel = params.sortModel?.[0];
+
+//       const sortField = sortModel?.colId;
+//       const sortDirection = sortModel?.sort;
+
+//       this.chargesService
+//         .getCharges(
+//           start,
+//           limit,
+//           sortField,
+//           sortDirection
+//         )
+//         .subscribe({
+//           next: (response) => {
+//             params.successCallback(
+//               response.rows,
+//               response.total,
+//             );
+//           },
+//           error: (error) => {
+//             console.error(error);
+//             params.failCallback();
+//           },
+//         });
+//     },
+//   };
+
+//   this.gridApi = params.api;
+
+//   this.gridApi.setGridOption('datasource', datasource);
+// }
+
+// Static, no scrolling, auto pagination or backend row fetching solution
+// rowData = toSignal(
+//   this.chargesService.getCharges(0, 20).pipe(
+//     map((response) => {
+//       console.log(response);
+//       return response.rows ?? [];
+//     }),
+//     catchError((error) => {
+//       console.error(error);
+//       return of([]);
+//     })
+//   ),
+//   { initialValue: [] }
+// );
