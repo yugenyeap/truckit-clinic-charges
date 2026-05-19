@@ -8,6 +8,12 @@ fake = Faker()
 
 db = SessionLocal()
 
+existing_rows = db.query(ClinicCharge).count()
+
+if existing_rows > 0:
+    print("Database already seeded")
+    exit()
+
 visit_types = ["New Patient", "Follow-up", "Emergency"]
 charge_types = [
     "Consultation",
