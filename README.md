@@ -27,6 +27,14 @@ Install and run:
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/truckit.git
+cd truckit
+```
+
 ## Start the Full Stack Application
 
 From the project root directory:
