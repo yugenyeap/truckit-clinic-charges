@@ -35,6 +35,7 @@ export class ChargesGridComponent implements AfterViewInit {
   columnDefs: ColDef[] = [
     {
       field: 'id',
+      headerName: 'ID',
       sortable: true,
       width: 84,
       minWidth: 72,
@@ -43,6 +44,7 @@ export class ChargesGridComponent implements AfterViewInit {
     },
     {
       field: 'medical_centre_name',
+      headerName: 'Medical Centre Name',
       sortable: true,
       filter: 'agTextColumnFilter',
       editable: true,
@@ -51,6 +53,7 @@ export class ChargesGridComponent implements AfterViewInit {
     },
     {
       field: 'patient_visit_type',
+      headerName: 'Patient Visit Type',
       sortable: true,
       editable: true,
       flex: 1.35,
@@ -58,6 +61,7 @@ export class ChargesGridComponent implements AfterViewInit {
     },
     {
       field: 'charge_type',
+      headerName: 'Charge Type',
       sortable: true,
       filter: 'agTextColumnFilter',
       editable: true,
@@ -66,6 +70,7 @@ export class ChargesGridComponent implements AfterViewInit {
     },
     {
       field: 'amount',
+      headerName: 'Amount',
       sortable: true,
       editable: true,
       flex: 1,
