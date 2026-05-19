@@ -2,9 +2,12 @@ from faker import Faker
 import random
 
 from database import SessionLocal
-from models import ClinicCharge
+from models import Base, ClinicCharge
+from database import engine
 
 fake = Faker()
+
+Base.metadata.create_all(bind=engine)
 
 db = SessionLocal()
 
