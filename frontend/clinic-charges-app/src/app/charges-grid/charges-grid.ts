@@ -26,7 +26,6 @@ import { ChargesService } from '../services/charges';
   styleUrls: ['./charges-grid.css']
 })
 export class ChargesGridComponent implements AfterViewInit {
-
   private chargesService = inject(ChargesService);
   private cdr = inject(ChangeDetectorRef);
 
@@ -65,19 +64,14 @@ export class ChargesGridComponent implements AfterViewInit {
   totalRows: number = 0;
 
   ngAfterViewInit(): void {
-
     this.setupDatasource();
-
   }
 
   onSortChanged(): void {
-
     this.agGrid.api.purgeInfiniteCache();
-
   }
 
   onCellValueChanged(event: any): void {
-
     const row = event.data;
 
     const updatePayload = {
@@ -90,30 +84,18 @@ export class ChargesGridComponent implements AfterViewInit {
     this.chargesService
       .updateCharge(row.id, updatePayload)
       .subscribe({
-
         next: () => {
-
           this.setupDatasource();
-
-
         },
-
         error: (error) => {
-
           console.error(error);
-
         }
-
       });
-
   }
 
   setupDatasource(): void {
-
     const datasource: IDatasource = {
-
       getRows: (params: IGetRowsParams) => {
-
         const startRow = params.startRow;
         const endRow = params.endRow;
 
@@ -140,9 +122,7 @@ export class ChargesGridComponent implements AfterViewInit {
             chargeTypeFilter
           )
           .subscribe({
-
             next: (response) => {
-
               this.totalRows = response.total;
               this.cdr.detectChanges();
 
@@ -150,28 +130,19 @@ export class ChargesGridComponent implements AfterViewInit {
                 response.rows,
                 response.total
               );
-
             },
-
             error: () => {
-
               params.failCallback();
-
             }
-
           });
-
       }
-
     };
 
     this.agGrid.api.setGridOption(
       'datasource',
       datasource
     );
-
   }
-
 }
 
 // onGridReady(params: GridReadyEvent): void {
