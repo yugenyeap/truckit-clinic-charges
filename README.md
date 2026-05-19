@@ -19,6 +19,24 @@ The application supports:
 
 ---
 
+# Running the Application
+
+## Prerequisites
+
+Install and run:
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+## Start the Full Stack Application
+
+From the project root directory:
+
+```bash
+docker compose up --build
+```
+
+---
+
 # Tech Stack
 
 ## Backend
@@ -54,26 +72,6 @@ The application supports:
 
 ## Creating Charges
 - Form to create new clinic charge records
-
----
-
-# Running the Application
-
-## Prerequisites
-
-Install and run:
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-
----
-
-## Start the Full Stack Application
-
-From the project root directory:
-
-```bash
-docker compose up --build
-```
 
 ---
 
