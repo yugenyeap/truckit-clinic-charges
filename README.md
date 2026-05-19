@@ -31,7 +31,7 @@ Install and run:
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/yugenyeap/truckit.git
+https://github.com/yugenyeap/truckit-clinic-charges.git
 cd truckit
 ```
 
