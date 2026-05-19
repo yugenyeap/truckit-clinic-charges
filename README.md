@@ -31,7 +31,7 @@ Install and run:
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/truckit.git
+git clone https://github.com/yugenyeap/truckit.git
 cd truckit
 ```
 
