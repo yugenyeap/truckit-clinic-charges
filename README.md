@@ -136,7 +136,7 @@ README.md
 # Notes
 
 - The database is automatically seeded on startup
-- AG Grid Community edition was used
+- AG Grid Community edition was used. The requirement for filtering charge_type with dropdown/exact match required the AG Grid enterprise version which requires a subscription. Exact match filtering still works but without the dropdown options.
 - Docker Compose orchestrates the frontend, backend, and database services
 
 ---
