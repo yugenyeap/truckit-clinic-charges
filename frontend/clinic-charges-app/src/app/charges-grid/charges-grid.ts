@@ -36,28 +36,40 @@ export class ChargesGridComponent implements AfterViewInit {
     {
       field: 'id',
       sortable: true,
+      width: 84,
+      minWidth: 72,
+      maxWidth: 96,
+      suppressSizeToFit: true,
     },
     {
       field: 'medical_centre_name',
       sortable: true,
       filter: 'agTextColumnFilter',
       editable: true,
+      flex: 2,
+      minWidth: 210,
     },
     {
       field: 'patient_visit_type',
       sortable: true,
       editable: true,
+      flex: 1.35,
+      minWidth: 170,
     },
     {
       field: 'charge_type',
       sortable: true,
       filter: 'agTextColumnFilter',
       editable: true,
+      flex: 1.25,
+      minWidth: 170,
     },
     {
       field: 'amount',
       sortable: true,
       editable: true,
+      flex: 1,
+      minWidth: 130,
     },
   ];
 

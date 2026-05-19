@@ -1,4 +1,54 @@
+.grid-shell {
+  padding: 0 14px;
+}
+
+.grid-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.total-charges-label {
+  display: inline-block;
+  margin: 0;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #f1f5ff;
+  border: 1px solid #d6e0ff;
+  color: #1f3a8a;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
 .grid-container {
   width: 100%;
   height: 500px;
+  border: 1px solid #dbe2ea;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+:host ::ng-deep .ag-theme-quartz {
+  --ag-font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, sans-serif;
+  --ag-font-size: 14px;
+  --ag-row-height: 42px;
+  --ag-header-height: 44px;
+  --ag-grid-size: 8px;
+  --ag-border-color: #e2e8f0;
+  --ag-background-color: #ffffff;
+  --ag-header-background-color: #f8fafc;
+  --ag-header-foreground-color: #1e293b;
+  --ag-foreground-color: #1f2937;
+  --ag-odd-row-background-color: #fcfdff;
+  --ag-selected-row-background-color: #eff6ff;
+}
+
+:host ::ng-deep .ag-theme-quartz .ag-header-cell-text {
+  font-weight: 700;
+}
+
+:host ::ng-deep .ag-theme-quartz .ag-row:hover {
+  background: #f8fbff;
 }

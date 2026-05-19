@@ -1,19 +1,23 @@
-<p>Total Charges: {{ totalRows }}</p>
+<div class="grid-shell">
+  <div class="grid-header">
+    <p class="total-charges-label">Total Charges: {{ totalRows }}</p>
+  </div>
 
-<div class="ag-theme-quartz grid-container">
-  <ag-grid-angular
-    theme="legacy"
-    style="width: 100%; height: 100%;"
+  <div class="ag-theme-quartz grid-container">
+    <ag-grid-angular
+      theme="legacy"
+      style="width: 100%; height: 100%;"
 
-    [columnDefs]="columnDefs"
+      [columnDefs]="columnDefs"
 
-    rowModelType="infinite"
-    [cacheBlockSize]="20"
+      rowModelType="infinite"
+      [cacheBlockSize]="20"
 
-    (sortChanged)="onSortChanged()"
-    (filterChanged)="setupDatasource()"
-    
-    (cellValueChanged)="onCellValueChanged($event)">
+      (sortChanged)="onSortChanged()"
+      (filterChanged)="setupDatasource()"
+      
+      (cellValueChanged)="onCellValueChanged($event)">
 
-  </ag-grid-angular>
+    </ag-grid-angular>
+  </div>
 </div>

@@ -1,35 +1,53 @@
-<form (ngSubmit)="submit()">
+<section class="form-shell">
+  <form (ngSubmit)="submit()" class="charge-form">
+    <div class="field-group">
+      <label for="medicalCentreName">Medical Centre</label>
+      <input
+        id="medicalCentreName"
+        type="text"
+        placeholder="Medical Centre Name"
+        [(ngModel)]="medicalCentreName"
+        name="medicalCentreName"
+      />
+    </div>
 
-  <input
-    type="text"
-    placeholder="Medical Centre Name"
-    [(ngModel)]="medicalCentreName"
-    name="medicalCentreName"
-  />
+    <div class="field-group">
+      <label for="patientVisitType">Patient Visit Type</label>
+      <input
+        id="patientVisitType"
+        type="text"
+        placeholder="Patient Visit Type"
+        [(ngModel)]="patientVisitType"
+        name="patientVisitType"
+      />
+    </div>
 
-  <input
-    type="text"
-    placeholder="Patient Visit Type"
-    [(ngModel)]="patientVisitType"
-    name="patientVisitType"
-  />
+    <div class="field-group">
+      <label for="chargeType">Charge Type</label>
+      <input
+        id="chargeType"
+        type="text"
+        placeholder="Charge Type"
+        [(ngModel)]="chargeType"
+        name="chargeType"
+      />
+    </div>
 
-  <input
-    type="text"
-    placeholder="Charge Type"
-    [(ngModel)]="chargeType"
-    name="chargeType"
-  />
+    <div class="field-group">
+      <label for="amount">Amount</label>
+      <input
+        id="amount"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="Amount"
+        [(ngModel)]="amount"
+        name="amount"
+      />
+    </div>
 
-  <input
-    type="number"
-    placeholder="Amount"
-    [(ngModel)]="amount"
-    name="amount"
-  />
-
-  <button type="submit">
-    Add Charge
-  </button>
-
-</form>
+    <button type="submit" class="submit-button">
+      Add Charge
+    </button>
+  </form>
+</section>
