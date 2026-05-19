@@ -87,15 +87,11 @@ export class ChargesGridComponent implements AfterViewInit {
       amount: row.amount
     };
 
-    console.log('Updating:', updatePayload);
-
     this.chargesService
       .updateCharge(row.id, updatePayload)
       .subscribe({
 
         next: () => {
-
-          console.log('Update successful');
 
           this.setupDatasource();
 
@@ -127,7 +123,6 @@ export class ChargesGridComponent implements AfterViewInit {
         const sortDirection = sortModel?.sort;
 
         const filterModel = params.filterModel;
-        console.log('filterModel', filterModel);
 
         const medicalCentreFilter =
           filterModel['medical_centre_name']?.filter;
@@ -148,8 +143,6 @@ export class ChargesGridComponent implements AfterViewInit {
 
             next: (response) => {
 
-              console.log('params', params)
-              console.log('response', response)
               this.totalRows = response.total;
               this.cdr.detectChanges();
 

@@ -29,15 +29,11 @@ export class AddChargeFormComponent {
       amount: this.amount
     };
 
-    console.log('Creating charge:', payload);
-
     this.chargesService
       .createCharge(payload)
       .subscribe({
 
         next: (response) => {
-
-          console.log('Charge created:', response);
 
           this.resetForm();
 

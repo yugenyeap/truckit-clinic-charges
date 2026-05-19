@@ -50,7 +50,6 @@ export class ChargesService {
         `&sort_direction=${sortDirection}`;
 
     }
-    console.log(url);
     return this.http.get<ChargesResponse>(url);
 
   }
