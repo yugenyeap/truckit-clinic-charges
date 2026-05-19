@@ -29,8 +29,8 @@ def root():
 
 @app.get("/charges")
 def get_charges(
-    start: int = Query(0, ge=0),
-    limit: int = Query(20, ge=1),
+    startRow: int = Query(0, ge=0),
+    endRow: int = Query(20, ge=1),
     sort_field: str | None = None,
     sort_direction: str | None = None,
     medical_centre_name: str | None = None,
@@ -38,6 +38,7 @@ def get_charges(
     db: Session = Depends(get_db)
 ):
     query = db.query(ClinicCharge)
+    total = query.count()
 
     # Filtering
     if medical_centre_name:
@@ -71,8 +72,8 @@ def get_charges(
 
     rows = (
         query
-        .offset(start)
-        .limit(limit)
+        .offset(startRow)
+        .limit(endRow)
         .all()
     )
 

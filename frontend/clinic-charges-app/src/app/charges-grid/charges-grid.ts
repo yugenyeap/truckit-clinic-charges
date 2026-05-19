@@ -2,6 +2,7 @@ import {
   Component,
   ViewChild,
   AfterViewInit,
+  ChangeDetectorRef,
   inject
 } from '@angular/core';
 
@@ -27,6 +28,7 @@ import { ChargesService } from '../services/charges';
 export class ChargesGridComponent implements AfterViewInit {
 
   private chargesService = inject(ChargesService);
+  private cdr = inject(ChangeDetectorRef);
 
   @ViewChild(AgGridAngular)
   agGrid!: AgGridAngular;
@@ -59,6 +61,8 @@ export class ChargesGridComponent implements AfterViewInit {
       editable: true,
     },
   ];
+
+  totalRows: number = 0;
 
   ngAfterViewInit(): void {
 
@@ -114,8 +118,8 @@ export class ChargesGridComponent implements AfterViewInit {
 
       getRows: (params: IGetRowsParams) => {
 
-        const start = params.startRow;
-        const limit = params.endRow - params.startRow;
+        const startRow = params.startRow;
+        const endRow = params.endRow;
 
         const sortModel = params.sortModel?.[0];
 
@@ -133,8 +137,8 @@ export class ChargesGridComponent implements AfterViewInit {
 
         this.chargesService
           .getCharges(
-            start,
-            limit,
+            startRow,
+            endRow,
             sortField,
             sortDirection,
             medicalCentreFilter,
@@ -146,6 +150,8 @@ export class ChargesGridComponent implements AfterViewInit {
 
               console.log('params', params)
               console.log('response', response)
+              this.totalRows = response.total;
+              this.cdr.detectChanges();
 
               params.successCallback(
                 response.rows,

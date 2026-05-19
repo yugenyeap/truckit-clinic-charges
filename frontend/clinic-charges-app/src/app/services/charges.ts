@@ -24,8 +24,8 @@ export class ChargesService {
   private apiUrl = 'http://localhost:8000';
 
   getCharges(
-    start: number,
-    limit: number,
+    startRow: number,
+    endRow: number,
     sortField?: string,
     sortDirection?: string,
     medicalCentreName?: string,
@@ -33,7 +33,7 @@ export class ChargesService {
   ) {
 
     let url =
-      `${this.apiUrl}/charges?start=${start}&limit=${limit}`;
+      `${this.apiUrl}/charges?startRow=${startRow}&endRow=${endRow}`;
 
     if (medicalCentreName) {
       url += `&medical_centre_name=${medicalCentreName}`;
