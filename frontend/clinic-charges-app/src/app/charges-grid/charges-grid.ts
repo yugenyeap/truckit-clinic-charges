@@ -140,6 +140,11 @@ export class ChargesGridComponent implements AfterViewInit {
           )
           .subscribe({
             next: (response) => {
+
+              // Keep debugging logs to prove in console, scrolling pagination chunks
+              console.log('params', params)
+              console.log('response', response)
+
               this.totalRows = response.total;
               this.cdr.detectChanges();
 
