@@ -6,6 +6,17 @@ services:
     ports:
       - "8000:8000"
 
+  frontend:
+    build:
+      context: ./frontend/clinic-charges-app
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend/clinic-charges-app:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
   db:
     image: postgres:15
     environment:
