@@ -1,4 +1,10 @@
-from fastapi import FastAPI, Depends, Query
+from fastapi import (
+    FastAPI,
+    Depends,
+    Query,
+    HTTPException,
+    status
+)
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -7,7 +13,8 @@ from models import Base, ClinicCharge
 from schemas  import (
     ClinicChargeResponse,
     ClinicChargeCreate,
-    ClinicChargeUpdate
+    ClinicChargeUpdate,
+    ChargesResponse
 )
 
 app = FastAPI()
@@ -27,7 +34,10 @@ Base.metadata.create_all(bind=engine)
 def root():
     return {"message": "API working!"}
 
-@app.get("/charges")
+@app.get(
+    "/charges",
+    response_model=ChargesResponse
+)
 def get_charges(
     startRow: int = Query(0, ge=0),
     endRow: int = Query(20, ge=1),
@@ -90,7 +100,11 @@ def get_charges(
         "total": total
     }
 
-@app.post("/charges")
+@app.post(
+    "/charges",
+    response_model=ClinicChargeResponse,
+    status_code=status.HTTP_201_CREATED
+)
 def create_charge(
     charge: ClinicChargeCreate,
     db: Session = Depends(get_db)
@@ -110,7 +124,10 @@ def create_charge(
 
     return ClinicChargeResponse.model_validate(new_charge)
 
-@app.patch("/charges/{charge_id}")
+@app.patch(
+    "/charges/{charge_id}",
+    response_model=ClinicChargeResponse
+)
 def update_charge(
     charge_id: int,
     charge_update: ClinicChargeUpdate,
@@ -119,7 +136,10 @@ def update_charge(
     charge = db.query(ClinicCharge).filter(ClinicCharge.id == charge_id).first()
 
     if not charge:
-        return {"error": "Charge not found"}
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Charge not found"
+        )
 
     #excelu_unset = true, only updates fields actually sent
     update_data = charge_update.model_dump(exclude_unset=True)
