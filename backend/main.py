@@ -38,7 +38,11 @@ def get_charges(
     db: Session = Depends(get_db)
 ):
     query = db.query(ClinicCharge)
+    query = query.order_by(ClinicCharge.id.asc())
+
     total = query.count()
+
+    limit = endRow - startRow
 
     # Filtering
     if medical_centre_name:
@@ -73,7 +77,7 @@ def get_charges(
     rows = (
         query
         .offset(startRow)
-        .limit(endRow)
+        .limit(limit)
         .all()
     )
 
